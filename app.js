@@ -15,21 +15,14 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      let searchEye = promptFor("Do you know their eye color? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      let searchEyeResults;
-      switch(searchEye){
-        case 'yes':
-          searchEyeResults = searchByEyeColor(people);
-        case 'no':
-          break;
-      }
       // TODO: search by traits
-      let alternateSearchType = prompt ("Which of the traits would you like to use for your search? DOB, Occupation, eye color, height, or weight?").toLowerCase;
+      let alternateSearchType = prompt("Which of the traits would you like to use for your search? DOB, Occupation, eye color, height, or weight?").toLowerCase();
+      let alternateResults;
       switch (alternateSearchType){
         case "dob":
-          searchResults = searchDOB(people);
-          let gotcha = displayPeople(searchResults);
-          alert (gotcha);
+          let DOBsearchResults = searchDOB(people);
+          let gotcha = displayPerson(DOBsearchResults);
+          alert(gotcha)
           break;
         case "Occupation":
           searchResults = searchOccupation(people);
@@ -47,8 +40,6 @@ function app(people){
           searchResults = searchWeight(people);
           displayPeople(searchResults);
           break;
-        
-        
       }
       break;
       default:
@@ -70,13 +61,15 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
+      displayPerson(person[0])
     // TODO: get person's info
     break;
     case "family":
+      displayPerson(person[0])
     // TODO: get person's family
     break;
     case "descendants":
@@ -169,6 +162,8 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
