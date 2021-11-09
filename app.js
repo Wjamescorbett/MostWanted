@@ -24,6 +24,32 @@ function app(people){
           break;
       }
       // TODO: search by traits
+      let alternateSearchType = prompt ("Which of the traits would you like to use for your search? DOB, Occupation, eye color, height, or weight?").toLowerCase;
+      switch (alternateSearchType){
+        case "dob":
+          searchResults = searchDOB(people);
+          let gotcha = displayPeople(searchResults);
+          alert (gotcha);
+          break;
+        case "Occupation":
+          searchResults = searchOccupation(people);
+          displayPeople(searchResults);
+          break
+        case "eye color":
+          searchResults = searchEyeColor(people);
+          displayPeople(searchResults);
+          break;
+        case "height":
+          searchResults = searchHeight(people);
+          displayPeople(searchResults);
+          break;
+        case "eye color":
+          searchResults = searchWeight(people);
+          displayPeople(searchResults);
+          break;
+        
+        
+      }
       break;
       default:
     app(people); // restart app
@@ -88,6 +114,19 @@ function searchByName(people){
   })
   // TODO: find the person single person object using the name they entered.
   return foundPerson;
+}
+function searchDOB(people){
+  let DOB = promptFor("What is the person's date of birth in the format m/d/yyyy?", autoValid);
+  let foundDOB = people.filter(function(potentialMatch){
+    if(potentialMatch.DOB === DOB){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  return foundDOB;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
