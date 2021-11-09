@@ -15,6 +15,14 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      let searchEye = promptFor("Do you know their eye color? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      let searchEyeResults;
+      switch(searchEye){
+        case 'yes':
+          searchEyeResults = searchByEyeColor(people);
+        case 'no':
+          break;
+      }
       // TODO: search by traits
       break;
       default:
@@ -84,8 +92,20 @@ function searchByName(people){
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
+  let eyeColor = promptFor("What is the person's eye color?", autoValid);
 
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor === eyeColor){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  return foundPerson;
 }
+
 
 //TODO: add other trait filter functions here.
 
