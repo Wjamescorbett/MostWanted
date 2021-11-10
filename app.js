@@ -28,7 +28,7 @@ function app(people){
           break
         case "eye color":
           let eyeSearchResults = searchEyeColor(people);
-          mainMenu(eyeSearchResults, people);
+          displayPeople(eyeSearchResults);
           break;
         case "height":
           let heightSearchResults = searchHeight(people);
@@ -150,9 +150,9 @@ function searchOccupation (people){
 }
 
 function searchWeight (people){
-  let weight = promptFor("What is the person's weight?", autoValid);
+  let weight = String(promptFor("What is the person's weight?", autoValid));
   let foundWeight = people.filter(function (potentialMatch){
-    if (potentialMatch.weight === weight) {
+    if (String(potentialMatch.weight) === weight) {
       return true;
     }
     else{
@@ -160,6 +160,19 @@ function searchWeight (people){
     }
   })
   return foundWeight;
+}
+
+function searchHeight (people){
+  let height = String(promptFor("What is the person's height?", autoValid));
+  let foundHeight = people.filter(function (potentialMatch){
+    if (String(potentialMatch.height) === height){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundHeight;
 }
 //TODO: add other trait filter functions here.
 
