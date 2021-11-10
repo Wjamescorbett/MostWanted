@@ -17,27 +17,25 @@ function app(people){
     case 'no':
       // TODO: search by traits
       let alternateSearchType = prompt("Which of the traits would you like to use for your search? DOB, Occupation, eye color, height, or weight?").toLowerCase();
-      let alternateResults;
       switch (alternateSearchType){
         case "dob":
-          let dobSearchResults
-          dobSearchResults = searchDOB(people);
+          let dobSearchResults = searchDOB(people);
           mainMenu(dobSearchResults, people);
           break;
         case "occupation":
-          searchResults = searchOccupation(people);
+          let occupationSearchResults = searchOccupation(people);
           mainMenu(occupationSearchResults, people);
           break
         case "eye color":
-          searchResults = searchEyeColor(people);
+          let eyeSearchResults = searchEyeColor(people);
           mainMenu(eyeSearchResults, people);
           break;
         case "height":
-          searchResults = searchHeight(people);
+          let heightSearchResults = searchHeight(people);
           mainMenu(heightSearchResults, people);
           break;
         case "weight":
-          searchResults = searchWeight(people);
+          let weightSearchResults = searchWeight(people);
           mainMenu(weightSearchResults, people);
           break;
       }
@@ -124,9 +122,8 @@ function searchDOB(people){
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
+function searchEyeColor(people){
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
-
   let foundEye = people.filter(function(potentialMatch){
     if(potentialMatch.eyeColor === eyeColor){
       return true;
@@ -141,17 +138,28 @@ function searchByEyeColor(people){
 
 function searchOccupation (people){
   let occupation = promptFor("What is the person's occupation?", autoValid);
-
   let foundOccupation = people.filter(function (potentialMatch){
-  if (potentialMatch.occupation === occupation) {
-    return true;
-  }
-  else{
-    return false;
-  }
+    if (potentialMatch.occupation === occupation) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
   return foundOccupation;
-  }
-  )
+}
+
+function searchWeight (people){
+  let weight = promptFor("What is the person's weight?", autoValid);
+  let foundWeight = people.filter(function (potentialMatch){
+    if (potentialMatch.weight === weight) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundWeight;
 }
 //TODO: add other trait filter functions here.
 
