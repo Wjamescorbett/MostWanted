@@ -16,7 +16,7 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
-      let alternateSearchType = prompt("Which of the traits would you like to use for your search? DOB, Occupation, eye color, height, or weight?").toLowerCase();
+      let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', or by 'multiple' criteria?").toLowerCase();
       switch (alternateSearchType){
         case "dob":
           let dobSearchResults = searchDOB(people);
@@ -42,7 +42,7 @@ function app(people){
           let multipleResults = searchMultiple(people);
           displayPeople(multipleResults);
           break;
-      }
+          }
       break;
       default:
     app(people); // restart app
@@ -182,22 +182,29 @@ function searchMultiple(people){
   if (eyeColorSearch == "yes"){
     multipleResults = searchEyeColor(multipleResults);
     displayPeople(multipleResults);
+    // return eyeColorSearch;
     }
   let weightSearch = promptFor("Do you know their weight? ", yesNo);
   if (weightSearch == "yes"){
-    multipleResults = searchWeight(multipleResults);
+    multipleResults = searchWeight(multipleResults)
+    displayPeople(multipleResults);
+    // return weightSearch;
+    ;
   }
   let heightSearch = promptFor("Do you know their height? ", yesNo);
   if (heightSearch == "yes"){
     multipleResults = searchHeight(multipleResults);
+    displayPeople(multipleResults);
   }
   let occupationSearch = promptFor("Do you know their Occupation? ", yesNo);
   if (occupationSearch == "yes"){
     multipleResults = searchOccupation(multipleResults);
+    displayPeople(multipleResults);
   }
   let dobSearch = promptFor("Do you know their DOB? ", yesNo);
   if (dobSearch == "yes"){
     multipleResults = searchDOB(multipleResults);
+    displayPeople(multipleResults);
   }
   return multipleResults;
 }
