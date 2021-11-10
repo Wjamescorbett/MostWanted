@@ -188,7 +188,7 @@ function searchHeight (people){
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
-    return person[0].firstName + " " + person[0].lastName;
+    return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
 
