@@ -20,23 +20,27 @@ function app(people){
       switch (alternateSearchType){
         case "dob":
           let dobSearchResults = searchDOB(people);
-          mainMenu(dobSearchResults, people);
+          displayPeople(dobSearchResults, people);
           break;
         case "occupation":
           let occupationSearchResults = searchOccupation(people);
-          mainMenu(occupationSearchResults, people);
+          displayPeople(occupationSearchResults);
           break
         case "eye color":
-          let eyeSearchResults = searchEyeColor(people);
-          displayPeople(eyeSearchResults);
+          let searchResults = searchEyeColor(people);
+          displayPeople(searchResults);
           break;
         case "height":
           let heightSearchResults = searchHeight(people);
-          mainMenu(heightSearchResults, people);
+          displayPeople(heightSearchResults);
           break;
         case "weight":
           let weightSearchResults = searchWeight(people);
-          mainMenu(weightSearchResults, people);
+          displayPeople(weightSearchResults);
+          break;
+        case "multiple":
+          let multipleResults = searchMultiple(people);
+          displayPeople(multipleResults);
           break;
       }
       break;
@@ -72,7 +76,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
-
+      descendantSearch(people, person);
     break;
     case "restart":
     app(people); // restart
@@ -104,7 +108,6 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
   return foundName;
 }
 function searchDOB(people){
@@ -117,7 +120,6 @@ function searchDOB(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
   return foundDOB;
 }
 
@@ -132,7 +134,6 @@ function searchEyeColor(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
   return foundEye;
 }
 
@@ -174,7 +175,34 @@ function searchHeight (people){
   })
   return foundHeight;
 }
-//TODO: add other trait filter functions here.
+
+function searchMultiple(people){
+  let multipleResults = people;
+  let eyeColorSearch = promptFor("Do you know their eye color? ", yesNo);
+  if (eyeColorSearch == "yes"){
+    multipleResults = searchEyeColor(multipleResults);
+    displayPeople(multipleResults);
+    }
+  let weightSearch = promptFor("Do you know their weight? ", yesNo);
+  if (weightSearch == "yes"){
+    multipleResults = searchWeight(multipleResults);
+  }
+  let heightSearch = promptFor("Do you know their height? ", yesNo);
+  if (heightSearch == "yes"){
+    multipleResults = searchHeight(multipleResults);
+  }
+  let occupationSearch = promptFor("Do you know their Occupation? ", yesNo);
+  if (occupationSearch == "yes"){
+    multipleResults = searchOccupation(multipleResults);
+  }
+  let dobSearch = promptFor("Do you know their DOB? ", yesNo);
+  if (dobSearch == "yes"){
+    multipleResults = searchDOB(multipleResults);
+  }
+  return multipleResults;
+}
+
+
 
 
 
