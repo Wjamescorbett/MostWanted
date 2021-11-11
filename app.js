@@ -1,10 +1,7 @@
 "use strict"
 
-// reminder for tomorrow somewhere vicinity line 196 to break out of loop once array length is 1
 
-// if (multipleResults.length = 1){
-//   break;
-// }
+
 
 //Menu functions.
 //Used for the overall flow of the application.
@@ -21,28 +18,51 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
-      let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', or by 'multiple' criteria?").toLowerCase();
+      let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', 'gender' or by 'multiple' criteria?").toLowerCase();
+      
       switch (alternateSearchType){
         case "dob":
           searchResults = searchDOB(people);
           displayPeople(searchResults, people);
+          if (people.length >  1){
+          searchResults = searchMultiple(people);
           break;
+          }
         case "occupation":
           searchResults = searchOccupation(people);
           displayPeople(searchResults);
+          if (people.length > 1){
+          searchResults = searchMultiple(people);
           break
+          }
         case "eye color":
           searchResults = searchEyeColor(people);
           displayPeople(searchResults);
+          if (people.length > 1){
+          searchResults = searchMultiple(people);
           break;
+          }
         case "height":
           searchResults = searchHeight(people);
           displayPeople(searchResults);
+          if (people.length > 1){
+          searchResults = searchMultiple(people);
           break;
+          }
         case "weight":
           searchResults = searchWeight(people);
           displayPeople(searchResults);
+          if (people.length > 1){
+          searchResults = searchMultiple(people);
           break;
+          }
+        case "gender":
+          searchResults = searchGender(people);
+          displayPeople(searchResults);
+          if (people.length > 1){
+          searchResults = searchMultiple(people);
+          break;
+          }
         case "multiple":
           searchResults = searchMultiple(people);
           displayPeople(searchResults);
@@ -142,6 +162,22 @@ function searchEyeColor(people){
   return foundEye;
 }
 
+function searchGender(people){
+  let gender = promptFor("What is the person's gender?", autoValid);
+  let foundgender = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === gender){
+      return true;
+  }
+  else{
+    return false;
+  }
+  
+  })
+  return foundgender;
+}
+
+
+
 function searchOccupation (people){
   let occupation = promptFor("What is the person's occupation?", autoValid);
   let foundOccupation = people.filter(function (potentialMatch){
@@ -181,34 +217,59 @@ function searchHeight (people){
   return foundHeight;
 }
 
+
+
 function searchMultiple(people){
   let multipleResults = people;
   do {
     let eyeColorSearch = promptFor("Do you know their eye color? ", yesNo);
+    if (multipleResults != 1){
     if (eyeColorSearch == "yes"){
       multipleResults = searchEyeColor(multipleResults);
-      displayPeople(multipleResults);
-      }
+    }}
+    if (multipleResults.length == 1){
+      break;
+    }
     let weightSearch = promptFor("Do you know their weight? ", yesNo);
-    if (weightSearch == "yes"){
+    if (multipleResults != 1){
+    if (weightSearch == "yes" ){
       multipleResults = searchWeight(multipleResults)
-      displayPeople(multipleResults);
-      }
+    }}
+    if (multipleResults.length == 1){
+      break;
+    }
     let heightSearch = promptFor("Do you know their height? ", yesNo);
-    if (heightSearch == "yes"){
+    if (multipleResults != 1){
+    if (heightSearch == "yes" || multipleResults.length > 1){
       multipleResults = searchHeight(multipleResults);
-      displayPeople(multipleResults); 
-      }
-    let occupationSearch = promptFor("Do you know their Occupation? ", yesNo);
-    if (occupationSearch == "yes"){
+    }}
+    if (multipleResults.length == 1){
+      break;
+    }
+    let occupationSearch = promptFor("Do you know their occupation? ", yesNo);
+    if (multipleResults != 1){
+    if (occupationSearch == "yes" || multipleResults.length > 1){
       multipleResults = searchOccupation(multipleResults);
-      displayPeople(multipleResults);
-      }
+    }}
+    if (multipleResults.length == 1){
+      break;
+    }
     let dobSearch = promptFor("Do you know their DOB? ", yesNo);
-    if (dobSearch == "yes"){
+    if (multipleResults != 1){
+    if (dobSearch == "yes" || multipleResults.length > 1){
       multipleResults = searchDOB(multipleResults);
-      displayPeople(multipleResults);
-      }
+    }}
+    if (multipleResults.length == 1){
+      break;
+    }
+    let genderSearch = promptFor("Do you know their gender?", yesNo);
+    if (multipleResults != 1){
+    if (genderSearch == "yes" || multipleResults.length > 1){
+      multipleResults = searchGender(multipleResults);
+    }}
+    if (multipleResults.length == 1){
+      break;
+    }
     } while (multipleResults.length > 1 && multipleResults.length != 0)
     
     return multipleResults;
