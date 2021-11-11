@@ -24,43 +24,55 @@ function app(people){
         case "dob":
           searchResults = searchDOB(people);
           displayPeople(searchResults, people);
-          if (people.length >  1){
+          if (searchResults.length >  1){
           searchResults = searchMultiple(people);
+          }
+          else{
           break;
           }
         case "occupation":
           searchResults = searchOccupation(people);
           displayPeople(searchResults);
-          if (people.length > 1){
+          if (searchResults.length > 1){
           searchResults = searchMultiple(people);
+          }
+          else{
           break
           }
         case "eye color":
           searchResults = searchEyeColor(people);
           displayPeople(searchResults);
-          if (people.length > 1){
+          if (searchResults.length > 1){
           searchResults = searchMultiple(people);
+          }
+          else{
           break;
           }
         case "height":
           searchResults = searchHeight(people);
           displayPeople(searchResults);
-          if (people.length > 1){
+          if (searchResults.length > 1){
           searchResults = searchMultiple(people);
+          }
+          else{
           break;
           }
         case "weight":
           searchResults = searchWeight(people);
           displayPeople(searchResults);
-          if (people.length > 1){
+          if (searchResults.length > 1){
           searchResults = searchMultiple(people);
+          }
+          else{
           break;
           }
         case "gender":
           searchResults = searchGender(people);
           displayPeople(searchResults);
-          if (people.length > 1){
+          if (searchResults.length > 1){
           searchResults = searchMultiple(people);
+          }
+          else{
           break;
           }
         case "multiple":
@@ -216,6 +228,7 @@ function searchHeight (people){
   })
   return foundHeight;
 }
+
 
 
 
