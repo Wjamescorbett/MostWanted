@@ -20,43 +20,59 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
-      let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', or by 'multiple' criteria?").toLowerCase();
-      switch (alternateSearchType){
-        case "dob":
-          searchResults = searchDOB(people);
-          displayPeople(searchResults, people);
-          break;
-        case "occupation":
-          searchResults = searchOccupation(people);
-          displayPeople(searchResults);
-          break
-        case "eye color":
-          searchResults = searchEyeColor(people);
-          displayPeople(searchResults);
-          break;
-        case "height":
-          searchResults = searchHeight(people);
-          displayPeople(searchResults);
-          break;
-        case "weight":
-          searchResults = searchWeight(people);
-          displayPeople(searchResults);
-          break;
-        case "multiple":
-          searchResults = searchMultiple(people);
-          displayPeople(searchResults);
-          break;
-          }
-      break;
-      default:
-    app(people); // restart app
-      break;
-  }
-  
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+      whatSearchingBy(people)
+      console.log("Test Text")
+    }
+    // break;
+    // default:
+  app(people); // restart app
+    // break;
 }
+
+
+
+      // TODO: search by traits
+
+function whatSearchingBy(people){
+  let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', or by 'multiple' criteria?").toLowerCase();
+  if (alternateSearchType === 'dob' || alternateSearchType === 'occupation'|| alternateSearchType === 'eye color' || alternateSearchType === 'height' || alternateSearchType === 'weight' || alternateSearchType === 'multiple'){
+  let searchResults;
+    switch (alternateSearchType){
+      case "dob":
+        searchResults = searchDOB(people);
+        displayPeople(searchResults, people);
+        break;
+      case "occupation":
+        searchResults = searchOccupation(people);
+        displayPeople(searchResults);
+        break
+      case "eye color":
+        searchResults = searchEyeColor(people);
+        displayPeople(searchResults);
+        break;
+      case "height":
+        searchResults = searchHeight(people);
+        displayPeople(searchResults);
+        break;
+      case "weight":
+        searchResults = searchWeight(people);
+        displayPeople(searchResults);
+        break;
+      case "multiple":
+        searchResults = searchMultiple(people);
+        displayPeople(searchResults);
+        break;
+    }
+  }
+  else{
+    alert("Please type 'dob', 'occupation','eye color', 'height', 'weight', or 'multiple'")
+    whatSearchingBy(people)
+  }
+}
+
+  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+//   mainMenu(searchResults, people){
+// }
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
