@@ -18,7 +18,7 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
-      let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', 'gender' or by 'multiple' criteria?").toLowerCase();
+      let alternateSearchType = prompt("Which of the traits would you like to use for your search? 'DOB', 'Occupation', 'eye color', 'height', 'weight', 'gender' or by 'multiple' criteria?");
       
       switch (alternateSearchType){
         case "dob":
@@ -93,14 +93,14 @@ function app(people){
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendents and other information that the user may want. */
 
   if(!person){
     alert("Could not find that individual.");
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendents'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
@@ -111,10 +111,17 @@ function mainMenu(person, people){
       displayPerson(person[0])
     // TODO: get person's family
     break;
-    case "descendants":
-    // TODO: get person's descendants
-      descendantSearch(people, person);
-    break;
+    case "descendents":
+    // TODO: get person's descendents
+      descendentSearch(people, person);
+      if (foundDescendent = []){
+        
+        break;
+      }
+      else{
+      displayPeople(foundDescendent);
+      break;
+      }
     case "restart":
     app(people); // restart
     break;
@@ -133,6 +140,23 @@ function mainMenu(person, people){
 //#region 
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+function descendentSearch(person,people){
+  let foundDescendent = []
+    for (let i = 0; i < people.length; i++){
+    if (people[i].parents.includes(person)){
+      foundDescendent.push(people[i].firstName + " " + people[i].lastName + " " + people[i].id);
+    for (let i = 0; i < foundDescendent.length; i++){
+      foundDescendent = foundDescendent.concat(descendentSearch(people,foundDescendent[i]))
+    }
+    
+}
+  displayPeople(foundDescendent)
+
+}
+
+}
+
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
